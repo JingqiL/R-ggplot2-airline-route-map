@@ -14,11 +14,9 @@ library(plotly)
 library(tidyr)
 ############Data processing################
 setwd("..")
-dir()
-dat<-read.csv(dir()[2],header=T)
+dat<-read.csv("airport information.csv",header=T)
 location<-read.csv(dir()[6],header=T)
-id<-read.csv(dir()[3],header=T)
-dat<-dat[,-1]
+id<-read.csv("airport id.csv",header=T)
 lineinworld<-(dat$ORIGIN_AIRPORT_ID%in%location$AIRPORT_ID)&(dat$DEST_AIRPORT_ID%in%location$AIRPORT_ID)
 worldline<-dat[lineinworld,c("ORIGIN_AIRPORT_ID","DEST_AIRPORT_ID")]##***************
 flights.ag<-ddply(worldline, c("ORIGIN_AIRPORT_ID","DEST_AIRPORT_ID"), function(x) count(x$DEST_AIRPORT_ID))
