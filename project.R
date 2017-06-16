@@ -1,3 +1,4 @@
+##############Libraries that are going to be used#################
 library(ggplot2)
 library(maps)
 library(rgeos)
@@ -11,7 +12,8 @@ library(data.table)
 library(ggmap)
 library(plotly)
 library(tidyr)
-setwd("C://Users//Jingqi//Desktop//503//project")
+############Data processing################
+setwd("..")
 dir()
 dat<-read.csv(dir()[2],header=T)
 location<-read.csv(dir()[6],header=T)
