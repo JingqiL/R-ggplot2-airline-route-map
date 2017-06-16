@@ -13,12 +13,12 @@ library(ggmap)
 library(plotly)
 library(tidyr)
 ############Data processing################
-setwd("..")
+setwd("...")
 dat<-read.csv("airport information.csv",header=T)
-location<-read.csv(dir()[6],header=T)
+location<-read.csv("location.csv",header=T)
 id<-read.csv("airport id.csv",header=T)
-lineinworld<-(dat$ORIGIN_AIRPORT_ID%in%location$AIRPORT_ID)&(dat$DEST_AIRPORT_ID%in%location$AIRPORT_ID)
-worldline<-dat[lineinworld,c("ORIGIN_AIRPORT_ID","DEST_AIRPORT_ID")]##***************
+lineinworld<-(dat$ORIGIN_AIRPORT_ID%in%location$AIRPORT_ID)&(dat$DEST_AIRPORT_ID%in%location$AIRPORT_ID)#Check if the airport in our dataset is in location database.
+worldline<-dat[lineinworld,c("ORIGIN_AIRPORT_ID","DEST_AIRPORT_ID")]#Only choose airport id.
 flights.ag<-ddply(worldline, c("ORIGIN_AIRPORT_ID","DEST_AIRPORT_ID"), function(x) count(x$DEST_AIRPORT_ID))
 flights.ll<-merge(flights.ag,location, by.x="DEST_AIRPORT_ID", by.y="AIRPORT_ID", all.x=T)
 flights.ll<-flights.ll[order(flights.ll$ORIGIN_AIRPORT_ID,flights.ll$DEST_AIRPORT_ID),]
